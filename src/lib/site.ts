@@ -6,7 +6,7 @@ export const site = {
   repo: "https://github.com/emartsantos/rs",
   location: "Philippines",
   markets: ["Singapore", "United States", "Philippines", "International"],
-  url: "https://rs.vercel.app",
+  url: "https://rs-one-chi.vercel.app",
   description:
     "Custom websites, e-commerce stores, and web applications built around each business — not another template. Based in the Philippines, working with clients in Singapore, the United States, and internationally.",
 } as const;
