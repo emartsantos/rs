@@ -34,6 +34,32 @@
   flex: none;
 }
 
+.lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.brandName {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.logoLight {
+  display: none;
+}
+
+.over .logoLight {
+  display: block;
+}
+
+.over .logoDark {
+  display: none;
+}
+
 .nav {
   display: flex;
   align-items: center;

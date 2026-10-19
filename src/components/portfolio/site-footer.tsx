@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { RsMark } from "@/components/brand/rs-mark";
+import { Logo } from "@/components/brand/logo";
 import { portfolioHref, site } from "@/lib/site";
 import { independentProjects } from "@/data/projects";
 import styles from "./site-footer.module.css";
@@ -51,7 +51,7 @@ export function SiteFooter() {
 
         <div className={styles.body}>
           <div className={styles.brandCol}>
-            <RsMark height={26} className={styles.mark} title="Raymart Santos monogram" />
+            <Logo tone="light" height={26} className={styles.mark} title="Raymart Santos monogram" />
             <p className={styles.meta}>
               Independent web developer & designer based in the Philippines, working with
               clients in Singapore, the United States, and internationally.

@@ -3,7 +3,7 @@ import { PageHero } from "@/components/ui/page-hero";
 import { Cta } from "@/components/ui/cta";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { RsMark } from "@/components/brand/rs-mark";
+import { Logo } from "@/components/brand/logo";
 import { portfolioHref, site } from "@/lib/site";
 import styles from "./about.module.css";
 
@@ -81,7 +81,7 @@ export default function AboutPage() {
           <div className={styles.bio}>
             <aside className={styles.facts}>
               <div className={styles.factsInner}>
-                <RsMark height={34} className={styles.mark} title="Raymart Santos monogram" />
+                <Logo tone="dark" height={34} className={styles.mark} title="Raymart Santos monogram" />
                 <dl className={styles.factList}>
                   {facts.map((fact) => (
                     <div key={fact.label} className={styles.factRow}>

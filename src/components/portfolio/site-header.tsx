@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { portfolioHref } from "@/lib/site";
-import { Wordmark } from "@/components/brand/rs-mark";
+import { Logo } from "@/components/brand/logo";
 import styles from "./site-header.module.css";
 
 const nav = [
@@ -51,7 +51,11 @@ export function SiteHeader() {
     >
       <div className={`shell ${styles.bar}`}>
         <Link href={portfolioHref("/")} className={styles.brand} aria-label="Raymart Santos — Home">
-          <Wordmark markHeight={22} />
+          <span className={styles.lockup}>
+            <Logo tone="light" height={22} priority className={styles.logoLight} />
+            <Logo tone="dark" height={22} priority className={styles.logoDark} />
+            <span className={styles.brandName}>Raymart Santos</span>
+          </span>
         </Link>
 
         <nav aria-label="Primary navigation" className={styles.nav}>
