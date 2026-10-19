@@ -1,50 +1,68 @@
 .list {
-  border-top: 1px solid var(--hairline);
+  border-top: 1px solid var(--border);
 }
 
 .item {
-  border-bottom: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--border);
+}
+
+.item h3 {
+  margin: 0;
 }
 
 .trigger {
   width: 100%;
   display: flex;
-  align-items: baseline;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 1.5rem;
-  padding: 1.35rem 0;
+  gap: 2rem;
+  padding: clamp(1.25rem, 2vw, 1.65rem) 0;
   background: none;
   border: none;
   cursor: pointer;
   text-align: left;
-  color: var(--ink);
-  transition: color 0.2s ease;
+  color: var(--fg);
+  font-family: var(--font-display);
+  transition: color 0.25s ease;
 }
 
 .trigger:hover {
-  color: var(--signal);
+  color: var(--accent);
+}
+
+.open .trigger {
+  color: var(--accent);
 }
 
 .question {
-  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  flex: 1;
+  font-size: clamp(1.0625rem, 0.95rem + 0.7vw, 1.5rem);
   font-weight: 500;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
 }
 
 .icon {
-  flex-shrink: 0;
-  color: var(--graphite);
-  transform: translateY(2px);
+  flex: none;
+  margin-top: 0.35rem;
+  color: var(--fg-subtle);
+  transition: color 0.25s ease, transform 0.35s ease;
+}
+
+.open .icon {
+  color: var(--accent);
+  transform: rotate(180deg);
 }
 
 .panel {
-  padding: 0 0 1.5rem;
-  max-width: 44rem;
+  overflow: hidden;
 }
 
 .answer {
   margin: 0;
-  color: var(--ink-soft);
-  line-height: 1.65;
-  font-size: 0.95rem;
+  padding: 0 0 clamp(1.35rem, 2.5vw, 1.85rem);
+  max-width: 68ch;
+  color: var(--fg-muted);
+  line-height: 1.7;
+  font-size: 1rem;
 }

@@ -3,30 +3,36 @@ export const processSteps = [
     index: "01",
     title: "Discovery",
     description:
-      "We clarify the business goal, audience, content, and constraints. Fixed-scope projects get a written proposal before anything is designed.",
+      "Understand the business, audience, objectives, requirements, and budget. Projects with a fixed scope get a written proposal before anything is designed.",
   },
   {
     index: "02",
-    title: "Direction",
+    title: "Planning",
     description:
-      "A visual direction is proposed — typography, layout language, art direction — reviewed against real content, not placeholder lorem ipsum.",
+      "Define the scope, sitemap, content structure, functionality, and technical approach — agreed in writing so there are no surprises later.",
   },
   {
     index: "03",
-    title: "Build",
+    title: "Design",
     description:
-      "Design and development progress together. You see real pages early and often, with structured revision rounds at agreed checkpoints.",
+      "Develop the creative direction, visual system, page compositions, and responsive layouts, reviewed against real content rather than placeholder text.",
   },
   {
     index: "04",
-    title: "Launch",
+    title: "Development",
     description:
-      "Performance checks, responsive verification, SEO foundations, and deployment. Nothing goes live until it works on real devices.",
+      "Build the approved design with maintainable code and appropriate technology, sharing real pages early and often at agreed checkpoints.",
   },
   {
     index: "05",
-    title: "Handover",
+    title: "Testing",
     description:
-      "Documentation, a walkthrough session, and source access. Ongoing maintenance can continue as a separate arrangement.",
+      "Validate functionality, responsive behaviour, accessibility, and performance on real devices before anything goes live.",
+  },
+  {
+    index: "06",
+    title: "Launch & Handover",
+    description:
+      "Deploy the approved website, then provide agreed documentation and support arrangements. The exact process and deliverables depend on the project.",
   },
 ];

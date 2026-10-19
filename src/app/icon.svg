@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 72" width="96" height="72" role="img" aria-label="RS — Raymart Santos">
+  <mask id="rs-tile" maskUnits="userSpaceOnUse" x="0" y="0" width="96" height="72">
+    <rect width="96" height="72" rx="17" fill="#fff" />
+    <g fill="none" stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 20 V52" />
+      <path d="M18 20 H36 A11 11 0 0 1 36 42 H18" />
+      <path d="M34 42 L45 52" />
+      <path d="M78 26 C78 19 68 18 63 22 C58 26 64 31 70 33 C76 35 80 38 78.5 44 C77 49 67 50 60 45" />
+    </g>
+  </mask>
+  <rect width="96" height="72" rx="17" fill="#0a0a0a" mask="url(#rs-tile)" />
+</svg>

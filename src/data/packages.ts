@@ -1,208 +1,149 @@
+export type PkgCategory = "Websites" | "E-commerce" | "Custom Software";
+
 export type Pkg = {
   id: string;
   name: string;
-  price: string;
-  category: "Websites" | "E-commerce" | "Custom Software";
+  category: PkgCategory;
+  /** One-line "best fit" for the comparison and cards. */
   ideal: string;
+  /** A short positioning line under the name. */
+  positioning: string;
   scope: string[];
   exclusions: string;
+  /** Restrained emphasis — the most comprehensive website engagement. */
+  featured?: boolean;
 };
 
 export const packages: Pkg[] = [
   {
-    id: "starter-landing",
-    name: "Starter Landing Page",
-    price: "S$350",
-    category: "Websites",
-    ideal: "Small businesses, freelancers, service providers, and focused campaigns that need one page that converts.",
-    scope: [
-      "One-page website with a custom visual direction",
-      "Responsive desktop, tablet, and mobile layouts",
-      "Business or service information",
-      "Contact CTA and inquiry form",
-      "Social media integration",
-      "Basic SEO setup",
-      "Performance optimization",
-      "Agreed revision rounds",
-    ],
-    exclusions:
-      "Advanced integrations, extensive copywriting, paid subscriptions, and complex functionality are additional.",
-  },
-  {
-    id: "business-website",
-    name: "Business Website",
-    price: "S$750",
-    category: "Websites",
-    ideal: "Small businesses that need a professional multi-page online presence.",
-    scope: [
-      "Up to five agreed pages",
-      "Custom brand-aligned design",
-      "Responsive layouts",
-      "About, services, and contact sections",
-      "Inquiry forms",
-      "Social links",
-      "Basic SEO",
-      "Performance optimization",
-      "Deployment and handover",
-    ],
-    exclusions: "Complex CMS functionality and third-party integrations are quoted separately.",
-  },
-  {
     id: "corporate-website",
     name: "Corporate Website",
-    price: "S$3,500",
     category: "Websites",
-    ideal: "Established companies needing a comprehensive corporate presence.",
+    positioning: "A credible multi page presence for an established company.",
+    ideal: "Companies replacing an outdated site with a structured, professional presence.",
     scope: [
-      "Up to 10 agreed pages",
-      "Bespoke corporate design",
-      "Custom navigation and page layouts",
-      "Service and industry pages",
-      "Case studies or project showcases",
-      "Contact and lead-generation forms",
-      "CMS when included in scope",
-      "SEO foundations",
-      "Performance and accessibility review",
-      "Deployment and documentation",
+      "Up to 10 approved pages",
+      "Custom corporate visual direction",
+      "Responsive layouts",
+      "Contact and inquiry forms",
+      "Basic SEO setup",
+      "Performance and accessibility checks",
+      "Deployment and handover",
     ],
-    exclusions: "Large content migrations and multilingual systems are scoped separately.",
+    exclusions:
+      "Content writing, extensive migration, custom integrations, and ongoing support are quoted separately unless included in your proposal.",
   },
   {
     id: "premium-corporate",
     name: "Premium Corporate Website",
-    price: "S$7,500",
     category: "Websites",
-    ideal: "Established brands that require a highly differentiated digital presence.",
+    positioning: "Bespoke art direction and a design system built for the brand.",
+    ideal: "Brands that need a highly differentiated presence, not a template.",
     scope: [
-      "Up to 20 agreed pages",
-      "Advanced art direction",
-      "Bespoke design system",
-      "Custom page templates",
-      "Sophisticated interactions",
-      "CMS integration",
-      "Case study or editorial content system",
-      "Advanced responsive design",
-      "Performance optimization",
-      "SEO foundations",
-      "Documentation and handover",
+      "Up to 20 approved pages",
+      "Bespoke art direction",
+      "Custom page compositions",
+      "Advanced visual interactions where appropriate",
+      "CMS integration when included in scope",
+      "SEO and performance optimization",
+      "Testing and documentation",
     ],
     exclusions:
       "Complex integrations, multilingual systems, and extensive content migration require separate scoping.",
-  },
-  {
-    id: "standard-ecommerce",
-    name: "Standard E-commerce",
-    price: "S$1,800",
-    category: "E-commerce",
-    ideal: "Businesses launching a standard online store on an established platform.",
-    scope: [
-      "Storefront setup",
-      "Product catalog",
-      "Collection organization",
-      "Product detail pages",
-      "Cart and supported checkout integration",
-      "Payment provider configuration where supported",
-      "Responsive shopping experience",
-      "Basic store SEO",
-      "Product management using the selected platform",
-      "Store handover",
-    ],
-    exclusions:
-      "Custom headless commerce, advanced inventory systems, ERP integrations, and substantial catalog migration require a separate quotation.",
+    featured: true,
   },
   {
     id: "advanced-ecommerce",
     name: "Advanced E-commerce",
-    price: "S$7,000",
     category: "E-commerce",
-    ideal: "Growing retail brands requiring a sophisticated storefront with deeper customization.",
+    positioning: "A bespoke storefront designed around how the range is actually sold.",
+    ideal: "Growing retail brands whose catalog deserves better than a stock theme.",
     scope: [
-      "Bespoke storefront design",
-      "Advanced collection and product templates",
-      "Search and filtering",
-      "Improved product discovery",
-      "Cart experience",
-      "Commerce platform integration",
-      "Payment and shipping configuration",
-      "Approved product data migration",
-      "Advanced responsive layouts",
-      "Performance and accessibility testing",
-      "Store management documentation",
+      "Custom storefront design",
+      "Product and collection presentation",
+      "Shopping experience improvements",
+      "Product filtering and search where supported",
+      "Cart and checkout integration",
+      "Responsive shopping experience",
+      "Platform configuration and handover",
     ],
     exclusions:
-      "Custom headless architecture, ERP integrations, subscriptions, complex pricing rules, and multi-market implementations may increase the project cost.",
+      "Final scope depends on the chosen commerce platform, product count, integrations, and migration requirements. Headless builds, ERP systems, and setups spanning several markets are assessed separately.",
   },
   {
     id: "website-admin",
     name: "Website + Admin Dashboard",
-    price: "S$10,000",
     category: "Custom Software",
-    ideal: "Businesses that need both a public website and an internal management system.",
+    positioning: "A public website paired with a secure internal system.",
+    ideal: "Businesses replacing spreadsheets and manual handoffs with a managed platform.",
     scope: [
-      "Bespoke public website",
-      "Secure administrator authentication",
-      "Role-based access control",
-      "Create, edit, delete, and publish workflows as approved",
-      "Database integration",
-      "Search and filtering",
-      "Forms and validation",
-      "Secure file management where required",
-      "Testing",
-      "Deployment",
-      "Administrator documentation",
+      "A bespoke public website",
+      "Custom admin interface",
+      "Content management backed by a database",
+      "Approved create, read, update, and delete workflows",
+      "Authentication and permissions enforced on the server",
+      "Testing and deployment documentation",
     ],
-    exclusions: "The actual feature list and security requirements must be approved before development.",
+    exclusions:
+      "Advanced workflows, complex permission models, third party integrations, and extensive reporting can change the estimate.",
   },
   {
     id: "enterprise-app",
     name: "Enterprise Web Application",
-    price: "S$25,000+",
     category: "Custom Software",
-    ideal:
-      "Organizations with complex business workflows, data management, integrations, and operational requirements.",
+    positioning: "Application development guided by discovery, for complex operations.",
+    ideal: "Organisations with custom workflows, data, permissions, and integrations.",
     scope: [
       "Requirements discovery",
       "Technical architecture",
-      "Custom product design",
-      "Authentication and permissions",
-      "Business workflow automation",
-      "Database architecture",
-      "API integrations",
-      "Reporting",
-      "Audit logging",
-      "Security controls",
-      "Automated testing",
-      "Deployment and monitoring",
-      "Technical documentation",
-      "Handover and training",
+      "Custom application design",
+      "Modules tailored to your business",
+      "Secure authentication and authorization",
+      "Database and API development",
+      "Approved integrations",
+      "Testing and deployment planning",
+      "Documentation and handover",
     ],
     exclusions:
-      "This is a discovery-led starting price — not a promise of an unlimited platform. Large integrations, regulated workloads, enterprise SSO, extensive migration, security audits, and ongoing support must be separately assessed.",
+      "An engagement guided by discovery — not a fixed quote. Large integrations, regulated workloads, enterprise SSO, security audits, and ongoing support must be separately assessed. Enterprise projects may require a paid discovery phase.",
   },
 ];
 
-export const packageCategories = [
+export const packageCategories: Array<{
+  id: PkgCategory;
+  index: string;
+  title: string;
+  blurb: string;
+}> = [
   {
-    id: "Websites" as const,
+    id: "Websites",
     index: "01",
     title: "Websites",
     blurb:
-      "From a focused one-page site to a twenty-page corporate presence. Every project starts with a visual direction built around the business — never a resold template.",
+      "From a structured corporate presence to a fully bespoke brand site. Every project starts with a visual direction built around the business — never a resold theme.",
   },
   {
-    id: "E-commerce" as const,
+    id: "E-commerce",
     index: "02",
     title: "E-commerce",
     blurb:
-      "Standard stores launch quickly on established platforms. Advanced stores add bespoke merchandising, deeper integrations, and migration work — which is why the scope and price differ.",
+      "Storefronts designed around the catalog and how it is sold, with the platform and integrations chosen to fit the business.",
   },
   {
-    id: "Custom Software" as const,
+    id: "Custom Software",
     index: "03",
     title: "Custom Software",
     blurb:
-      "Public websites backed by internal systems — or full operational platforms. These are discovery-led engagements where the feature set is approved before a build begins.",
+      "Public websites backed by internal systems, or full operational platforms. These engagements are guided by discovery, where the feature set is approved before a build begins.",
   },
+];
+
+export const pricingConditions: string[] = [
+  "Every engagement is quoted from confirmed, written requirements — never the other way around.",
+  "Domain registration, hosting, paid apps, and third party subscriptions are quoted separately unless included in your proposal.",
+  "Content writing, extensive migration, custom integrations, and ongoing support are agreed in writing before work begins.",
+  "Additional features or changes outside the approved scope may require a separate quotation.",
+  "Enterprise engagements may begin with a paid discovery phase before a final build estimate is issued.",
 ];
 
 export const comparisonRows: Array<{
@@ -210,68 +151,53 @@ export const comparisonRows: Array<{
   values: Record<string, string>;
 }> = [
   {
-    label: "Typical client",
+    label: "Best fit",
     values: {
-      "Starter Landing Page": "Freelancers, campaigns, single-service businesses",
-      "Business Website": "Small businesses needing a professional presence",
-      "Corporate Website": "Established companies, multi-service firms",
-      "Premium Corporate Website": "Brands requiring differentiated design",
-      "Standard E-commerce": "Retailers launching a first or second store",
-      "Advanced E-commerce": "Growing retail brands with real catalogs",
+      "Corporate Website": "Established companies with several service lines",
+      "Premium Corporate Website": "Brands needing differentiated art direction",
+      "Advanced E-commerce": "Growing retail brands with a real catalog",
       "Website + Admin Dashboard": "Businesses replacing spreadsheet workflows",
-      "Enterprise Web Application": "Organizations with complex operations",
+      "Enterprise Web Application": "Organisations with complex operations",
     },
   },
   {
-    label: "Pages / scope",
+    label: "Typical scope",
     values: {
-      "Starter Landing Page": "1 page",
-      "Business Website": "Up to 5 pages",
       "Corporate Website": "Up to 10 pages",
       "Premium Corporate Website": "Up to 20 pages",
-      "Standard E-commerce": "Storefront + catalog + PDPs",
-      "Advanced E-commerce": "Bespoke storefront + advanced templates",
-      "Website + Admin Dashboard": "Website + authenticated internal app",
-      "Enterprise Web Application": "Discovery-defined platform",
+      "Advanced E-commerce": "Storefront + catalog + product pages",
+      "Website + Admin Dashboard": "Public website + authenticated app",
+      "Enterprise Web Application": "Platform defined by discovery",
+    },
+  },
+  {
+    label: "Main deliverables",
+    values: {
+      "Corporate Website": "Custom design, responsive layouts, inquiry forms, deployment",
+      "Premium Corporate Website": "Design system, custom templates, CMS, testing",
+      "Advanced E-commerce": "Bespoke storefront, filtering, cart & checkout",
+      "Website + Admin Dashboard": "Admin workflows, database, roles & permissions",
+      "Enterprise Web Application": "Architecture, modules, APIs, integrations, documentation",
     },
   },
   {
     label: "CMS / backend",
     values: {
-      "Starter Landing Page": "Not included",
-      "Business Website": "Quoted separately if needed",
-      "Corporate Website": "When included in scope",
-      "Premium Corporate Website": "Included",
-      "Standard E-commerce": "Platform-provided admin",
-      "Advanced E-commerce": "Platform-provided admin + custom layers",
+      "Corporate Website": "Quoted separately if needed",
+      "Premium Corporate Website": "Included when in scope",
+      "Advanced E-commerce": "Admin provided by the platform",
       "Website + Admin Dashboard": "Custom backend + database",
       "Enterprise Web Application": "Custom architecture throughout",
     },
   },
   {
-    label: "Customization level",
+    label: "Discovery required",
     values: {
-      "Starter Landing Page": "Custom visual direction on one page",
-      "Business Website": "Brand-aligned custom design",
-      "Corporate Website": "Bespoke layouts and navigation",
-      "Premium Corporate Website": "Bespoke design system + templates",
-      "Standard E-commerce": "Platform theme, configured well",
-      "Advanced E-commerce": "Bespoke storefront and templates",
-      "Website + Admin Dashboard": "Fully bespoke, both surfaces",
-      "Enterprise Web Application": "Fully bespoke, discovery-led",
-    },
-  },
-  {
-    label: "Important exclusions",
-    values: {
-      "Starter Landing Page": "Copywriting, integrations, subscriptions",
-      "Business Website": "Complex CMS, third-party integrations",
-      "Corporate Website": "Large migrations, multilingual",
-      "Premium Corporate Website": "Complex integrations, multilingual",
-      "Standard E-commerce": "Headless builds, ERP, catalog migration",
-      "Advanced E-commerce": "ERP, subscriptions, multi-market",
-      "Website + Admin Dashboard": "Unscoped feature lists, security audits",
-      "Enterprise Web Application": "SSO, regulated workloads, audits — separately assessed",
+      "Corporate Website": "Light — scope confirmed in writing",
+      "Premium Corporate Website": "Light — content and CMS planning",
+      "Advanced E-commerce": "Moderate — platform & catalog review",
+      "Website + Admin Dashboard": "Moderate — workflow definition",
+      "Enterprise Web Application": "Extensive — paid discovery phase",
     },
   },
 ];

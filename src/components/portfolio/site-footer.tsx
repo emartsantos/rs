@@ -1,100 +1,92 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { RsMark } from "@/components/brand/rs-mark";
 import { portfolioHref, site } from "@/lib/site";
+import { independentProjects } from "@/data/projects";
 import styles from "./site-footer.module.css";
 
-const conceptDemos = [
-  { label: "Auren Studio", href: "/sites/auren-studio" },
-  { label: "Fieldnote Coffee", href: "/sites/fieldnote-coffee" },
-  { label: "Meridian Advisory", href: "/sites/meridian-advisory" },
-  { label: "Oriel Objects", href: "/sites/oriel-objects" },
-  { label: "Northstar Operations", href: "/sites/northstar-operations" },
+const navSections = [
+  {
+    title: "Explore",
+    links: [
+      { label: "All projects", href: portfolioHref("/work") },
+      { label: "Website concepts", href: portfolioHref("/concepts") },
+      { label: "Services", href: portfolioHref("/services") },
+      { label: "Engagements", href: portfolioHref("/pricing") },
+    ],
+  },
+  {
+    title: "Projects",
+    links: independentProjects.map((p) => ({
+      label: p.title,
+      href: p.externalUrl ?? portfolioHref(`/work/${p.slug}`),
+      external: !!p.externalUrl,
+    })),
+  },
+  {
+    title: "Connect",
+    links: [
+      { label: "About", href: portfolioHref("/about") },
+      { label: "Contact", href: portfolioHref("/contact") },
+      { label: "GitHub", href: site.github, external: true },
+    ],
+  },
 ];
 
 export function SiteFooter() {
   return (
-    <footer className={`hairline-t ${styles.footer}`}>
-      <div className="container-portfolio">
-        <div className={styles.emailBlock}>
-          <span className="mono-label">Start a conversation</span>
-          <a href={`mailto:${site.email}`} className={`font-display ${styles.emailLink}`}>
+    <footer className={`${styles.footer} band-ink`}>
+      <div className="shell">
+        <div className={styles.head}>
+          <span className={`eyebrow ${styles.kicker}`}>Available for select projects</span>
+          <a
+            href={`mailto:${site.email}`}
+            className={styles.email}
+            aria-label={`Email ${site.name}`}
+          >
             {site.email}
-            <ArrowUpRight aria-hidden="true" strokeWidth={1.5} />
+            <ArrowUpRight aria-hidden="true" size={32} strokeWidth={1.5} className={styles.emailIcon} />
           </a>
         </div>
 
-        <div className={styles.columns}>
+        <div className={styles.body}>
           <div className={styles.brandCol}>
-            <p className={styles.brandName}>{site.name}</p>
-            <p className={styles.brandRole}>{site.role}</p>
-            <p className={`annotation ${styles.brandMeta}`}>
-              Based in the Philippines
-              <br />
-              Working with clients in SG · US · PH · International
+            <RsMark height={26} className={styles.mark} title="Raymart Santos monogram" />
+            <p className={styles.meta}>
+              Independent web developer & designer based in the Philippines, working with
+              clients in Singapore, the United States, and internationally.
             </p>
+            <a href={site.github} className={styles.social} target="_blank" rel="noopener noreferrer">
+              github.com/emartsantos
+              <ArrowUpRight aria-hidden="true" size={14} strokeWidth={1.75} />
+            </a>
           </div>
 
-          <nav aria-label="Footer" className={styles.linkGrid}>
-            <div>
-              <span className="mono-label">§01 Portfolio</span>
-              <ul className={styles.links}>
-                <li>
-                  <Link href={portfolioHref("/work")} className="link-ink">
-                    All work
-                  </Link>
-                </li>
-                <li>
-                  <Link href={portfolioHref("/services")} className="link-ink">
-                    Services
-                  </Link>
-                </li>
-                <li>
-                  <Link href={portfolioHref("/pricing")} className="link-ink">
-                    Pricing
-                                   </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <span className="mono-label">§02 Live demos</span>
-              <ul className={styles.links}>
-                {conceptDemos.map((demo) => (
-                  <li key={demo.href}>
-                    <Link href={demo.href} className="link-ink">
-                      {demo.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <span className="mono-label">§03 Elsewhere</span>
-              <ul className={styles.links}>
-                <li>
-                  <Link href={portfolioHref("/about")} className="link-ink">
-                    About
-                  </Link>
-                </li>
-                <li>
-                  <Link href={portfolioHref("/contact")} className="link-ink">
-                    Contact
-                  </Link>
-                </li>
-                <li>
-                  <a href={site.github} className="link-ink" target="_blank" rel="noopener noreferrer">
-                    GitHub ↗
-                  </a>
-                </li>
-              </ul>
-            </div>
+          <nav aria-label="Footer navigation" className={styles.navGrid}>
+            {navSections.map((section) => (
+              <div key={section.title} className={styles.navColumn}>
+                <span className={`eyebrow ${styles.navTitle}`}>{section.title}</span>
+                <ul className={styles.navLinks}>
+                  {section.links.map((link) => (
+                    <li key={link.href}>
+                      {link.external ? (
+                        <a href={link.href} target="_blank" rel="noopener noreferrer">
+                          {link.label}
+                        </a>
+                      ) : (
+                        <Link href={link.href}>{link.label}</Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </nav>
         </div>
 
-        <div className={styles.bottomBar}>
-          <span className="annotation">© {new Date().getFullYear()} {site.name}</span>
-          <span className="annotation">Set in Archivo &amp; IBM Plex Mono · Built with Next.js</span>
+        <div className={styles.bottom}>
+          <p>© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
+          <p>Set in Instrument Sans, Fraunces &amp; IBM Plex Mono — Built with Next.js</p>
         </div>
       </div>
     </footer>

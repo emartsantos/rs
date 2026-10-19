@@ -1,54 +1,44 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { ArrowUpRight } from "lucide-react";
 import { Cta } from "@/components/ui/cta";
-import { SectionHeading } from "@/components/ui/section-heading";
 import { Accordion } from "@/components/ui/accordion";
 import { Reveal } from "@/components/ui/reveal";
+import { SectionHeading } from "@/components/ui/section-heading";
+import { Marquee } from "@/components/ui/marquee";
 import { FeaturedProjectRow } from "@/components/portfolio/featured-project-row";
 import { portfolioHref, site } from "@/lib/site";
-import { conceptProjects } from "@/data/projects";
+import { independentProjects, unsplashUrl } from "@/data/projects";
 import { services } from "@/data/services";
-import { packageCategories } from "@/data/packages";
+import { packages, packageCategories } from "@/data/packages";
+import { concepts } from "@/data/concepts";
 import { processSteps } from "@/data/process";
 import { faqItems } from "@/data/faq";
 import styles from "./home.module.css";
 
 export const metadata: Metadata = {
-  title: `${site.name} — Web Developer & Website Designer`,
+  title: { absolute: `${site.name} — Web Developer & Website Designer` },
   description: site.description,
   alternates: { canonical: site.url + "/" },
 };
 
-const featured = ["auren-studio", "meridian-advisory", "oriel-objects", "northstar-operations"]
-  .map((slug) => conceptProjects.find((p) => p.slug === slug))
-  .filter((p): p is NonNullable<typeof p> => Boolean(p));
+const marqueeItems = [
+  "Custom websites",
+  "E-commerce",
+  "Web applications",
+  "Design systems",
+  "Next.js & React",
+  "Performance",
+  "Accessibility",
+  "CMS integration",
+];
 
-const priceBlurbs: Record<string, string> = {
-  Websites:
-    "Focused landing pages to twenty-page corporate sites — custom direction, transparent starting prices.",
-  "E-commerce":
-    "Standard stores on established platforms, and advanced storefronts with deeper merchandising.",
-  "Custom Software":
-    "Websites backed by admin systems, up to full enterprise web applications. Discovery-led.",
-};
-
-const whyItems = [
-  {
-    title: "Custom direction, every time",
-    text: "No resold templates. Each project starts from your business, your audience, and the competitors you actually face.",
-  },
-  {
-    title: "Transparent starting prices",
-    text: "Package pricing is published up front, with deliverables and exclusions written plainly. No surprise invoices.",
-  },
-  {
-    title: "You work with me directly",
-    text: "One person accountable for design and engineering — no account managers, no handoffs, no diluted decisions.",
-  },
-  {
-    title: "Built to hold up",
-    text: "Performance budgets, accessibility targets, responsive verification, and maintainable code come standard.",
-  },
+const heroFacts = [
+  { label: "Availability", value: "Open to new projects" },
+  { label: "Markets", value: "Singapore · United States · PH" },
+  { label: "Focus", value: "Custom design & development" },
+  { label: "Core stack", value: "Next.js · React · TypeScript" },
 ];
 
 const specRows = [
@@ -70,189 +60,226 @@ const specRows = [
   },
   {
     layer: "Quality",
-    stack: "WCAG 2.2 AA as a working target · Core Web Vitals · keyboard navigation · reduced-motion support.",
+    stack: "WCAG 2.2 AA target · Core Web Vitals · keyboard navigation · reduced motion support.",
   },
   {
     layer: "Delivery",
-    stack: "GitHub Pages & Vercel deployments · CI pipelines · documentation and handover sessions.",
+    stack: "GitHub Pages & Vercel · CI pipelines · documentation and handover.",
   },
 ];
 
-const keywords = [
-  "Landing pages",
-  "Corporate websites",
-  "E-commerce",
-  "Admin dashboards",
-  "Enterprise web apps",
-  "Performance",
-  "Accessibility",
-];
+const packagesByCategory = packageCategories.map((cat) => ({
+  ...cat,
+  items: packages.filter((p) => p.category === cat.id),
+}));
 
 export default function HomePage() {
   return (
     <>
       {/* ——— Hero ——— */}
-      <section className={styles.hero} aria-label="Introduction">
-        <div className={`container-portfolio ${styles.heroGrid}`}>
-          <div>
-            <div className={styles.heroLabel}>
-              <span className="mono-label">Web Developer · Website Designer · Full-Stack</span>
-              <span className="mono-label">{site.location} — working worldwide</span>
-            </div>
-            <h1 className={`font-display ${styles.heroTitle}`}>
-              Digital products built around your business —{" "}
-              <span className={styles.heroTitleSignal}>not another template.</span>
-            </h1>
-            <p className={styles.heroSub}>
-              I design and build landing pages, corporate websites, e-commerce stores, admin systems, and web
-              applications for businesses in Singapore, the United States, the Philippines, and beyond — with
-              transparent pricing and production-grade engineering.
-            </p>
-            <div className={styles.heroActions}>
-              <Cta href={portfolioHref("/contact")}>Start a project</Cta>
-              <Cta href={portfolioHref("/work")} variant="outline">
-                View selected work
-              </Cta>
-            </div>
+      <section className={`${styles.hero} band-ink`} aria-label="Introduction">
+        <div className={`shell ${styles.heroInner}`}>
+          <div className={styles.heroTop}>
+            <span className="eyebrow">Independent web developer &amp; designer</span>
+            <span className={`eyebrow ${styles.heroLoc}`}>Philippines · Working worldwide</span>
           </div>
 
-          <aside className={styles.heroRail} aria-label="Quick facts">
-            <div className={styles.railItem}>
-              <span className="mono-label">Availability</span>
-              <span className={styles.railValue}>
-                <span className={styles.railDot} aria-hidden="true" />
-                Open to new projects
-              </span>
-            </div>
-            <div className={styles.railItem}>
-              <span className="mono-label">Markets</span>
-              <span className={styles.railValue}>SG · US · PH · International</span>
-            </div>
-            <div className={styles.railItem}>
-              <span className="mono-label">Projects from</span>
-              <span className={styles.railValue}>S$350 — 8 published packages</span>
-            </div>
-            <div className={styles.railItem}>
-              <span className="mono-label">Contact</span>
-              <span className={styles.railValue}>
-                <a href={`mailto:${site.email}`} className="link-ink">
-                  {site.email}
-                </a>
-              </span>
-            </div>
-          </aside>
+          <div className={styles.heroMain}>
+            <Reveal>
+              <h1 className={styles.heroTitle}>
+                Websites and digital products <span className="serif">built around</span> your business.
+              </h1>
+            </Reveal>
+
+            <Reveal className="reveal-delay-1">
+              <div className={styles.heroLower}>
+                <p className={styles.heroSub}>
+                  I design and develop custom websites, online stores, and business
+                  applications — with a focus on thoughtful design, responsive
+                  experiences, and reliable implementation.
+                </p>
+                <div className={styles.heroActions}>
+                  <Cta href={portfolioHref("/contact")}>Start a project</Cta>
+                  <Cta href={portfolioHref("/work")} variant="secondary">
+                    View selected work
+                  </Cta>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+
+          <Reveal className="reveal-delay-2">
+            <dl className={styles.heroFacts}>
+              {heroFacts.map((fact) => (
+                <div key={fact.label} className={styles.fact}>
+                  <dt className="eyebrow">{fact.label}</dt>
+                  <dd className={styles.factValue}>{fact.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
         </div>
       </section>
 
-      <div className={styles.strip}>
-        <div className={`container-portfolio ${styles.stripInner}`}>
-          {keywords.map((k) => (
-            <span key={k} className={styles.stripItem}>
-              {k}
-            </span>
-          ))}
-        </div>
+      {/* ——— Marquee ——— */}
+      <div className={styles.marqueeBand}>
+        <Marquee items={marqueeItems} />
       </div>
 
       {/* ——— Selected work ——— */}
-      <section className={styles.section} aria-labelledby="work-heading">
-        <div className="container-portfolio">
-          <div className={styles.sectionHead}>
+      <section className="section" aria-labelledby="work-heading">
+        <div className="shell">
+          <Reveal>
             <SectionHeading
+              id="work-heading"
               index="01"
               title="Selected work"
-              annotation="Five concept sites, each with its own design language — plus independent projects, live and deployed."
+              annotation="Five independent projects — each with its own design language, built and documented end to end. Source and live deployments are linked wherever they exist."
             />
-            <Link href={portfolioHref("/work")} className="link-ink">
-              All work →
-            </Link>
-          </div>
-          <div>
-            {featured.map((project, i) => (
+          </Reveal>
+
+          <div className={styles.workList}>
+            {independentProjects.map((project, index) => (
               <Reveal key={project.slug}>
-                <FeaturedProjectRow project={project} flip={i % 2 === 1} />
+                <FeaturedProjectRow project={project} index={index} flip={index % 2 === 1} />
               </Reveal>
             ))}
           </div>
+
+          <Reveal>
+            <div className={styles.foot}>
+              <Link href={portfolioHref("/work")} className={styles.footLink}>
+                View all projects <ArrowUpRight size={16} aria-hidden="true" />
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ——— Services ——— */}
-      <section className={styles.section} aria-labelledby="services-heading">
-        <div className="container-portfolio">
-          <div className={styles.sectionHead}>
+      <section className="section band-ink" aria-labelledby="services-heading">
+        <div className="shell">
+          <Reveal>
             <SectionHeading
+              id="services-heading"
               index="02"
-              title="Services & capabilities"
-              annotation="Ten services, one standard of execution. Business value first — technology chosen to serve it."
+              title="Services"
+              annotation="Six services — from corporate websites to enterprise web applications. Each engagement is scoped and delivered with the same rigour, whatever its size."
             />
-            <Link href={portfolioHref("/services")} className="link-ink">
-              Service details →
-            </Link>
-          </div>
-          <div className={styles.ledger}>
+          </Reveal>
+
+          <ol className={styles.serviceList}>
             {services.map((service) => (
-              <Link
-                key={service.index}
-                href={portfolioHref("/services")}
-                className={styles.ledgerRow}
-              >
-                <span className={styles.ledgerIndex}>{service.index}</span>
-                <span className={styles.ledgerTitle}>{service.title}</span>
-                <span className={styles.ledgerValue}>{service.value}</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ——— Pricing snapshot ——— */}
-      <section className={styles.section} aria-labelledby="pricing-heading">
-        <div className="container-portfolio">
-          <div className={styles.sectionHead}>
-            <SectionHeading
-              index="03"
-              title="Transparent pricing"
-              annotation="Starting prices, published. Final quotations follow approved scope — never the other way around."
-            />
-            <Link href={portfolioHref("/pricing")} className="link-ink">
-              Full pricing →
-            </Link>
-          </div>
-          <div className={styles.priceGrid}>
-            {packageCategories.map((cat) => (
-              <Link key={cat.id} href={portfolioHref("/pricing")} className={styles.priceCol}>
-                <span className="mono-label">§{cat.index}</span>
-                <h3 className={styles.priceName}>{cat.title}</h3>
-                <span className={styles.priceFrom}>
-                  From{" "}
-                  {cat.id === "Websites"
-                    ? "S$350"
-                    : cat.id === "E-commerce"
-                      ? "S$1,800"
-                      : "S$10,000"}
+              <Reveal as="li" key={service.index} className={styles.serviceRow}>
+                <span className={styles.serviceNum} aria-hidden="true">
+                  {service.index}
                 </span>
-                <p className={styles.priceBlurb}>{priceBlurbs[cat.id]}</p>
-                <span className={styles.priceArrow}>See packages →</span>
-              </Link>
+                <div className={styles.serviceBody}>
+                  <h3 className={styles.serviceName}>{service.title}</h3>
+                  <p className={styles.serviceValue}>{service.value}</p>
+                  <ul className={styles.serviceTags} aria-label={`${service.title} deliverables`}>
+                    {service.deliverables.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+                <Link
+                  href={portfolioHref("/contact")}
+                  className={styles.serviceCta}
+                  aria-label={`Discuss ${service.title}`}
+                >
+                  Discuss <ArrowUpRight size={15} aria-hidden="true" />
+                </Link>
+              </Reveal>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
-      {/* ——— Why ——— */}
-      <section className={styles.section} aria-labelledby="why-heading">
-        <div className="container-portfolio">
-          <SectionHeading
-            index="04"
-            title="Why work with me"
-            annotation="A small studio's attention with an engineer's discipline."
-          />
-          <div className={styles.whyGrid} style={{ marginTop: "2.5rem" }}>
-            {whyItems.map((item) => (
-              <Reveal key={item.title} className={styles.whyItem}>
-                <h3 className={styles.whyTitle}>{item.title}</h3>
-                <p className={styles.whyText}>{item.text}</p>
+      {/* ——— Website Concepts ——— */}
+      <section className="section" aria-labelledby="concepts-heading">
+        <div className="shell">
+          <Reveal>
+            <SectionHeading
+              id="concepts-heading"
+              index="03"
+              title="Website concepts"
+              annotation="Five design directions for common kinds of business — illustrations of range and craft, clearly labelled as concepts rather than delivered client work."
+            />
+          </Reveal>
+
+          <div className={styles.conceptGrid}>
+            {concepts.map((concept) => (
+              <Reveal key={concept.id} className={styles.conceptCell}>
+                <Link href={portfolioHref("/concepts")} className={styles.conceptCard}>
+                  <div className={`${styles.conceptMedia} img-wrapper`}>
+                    <Image
+                      src={unsplashUrl(concept.cover.photoId, 1400)}
+                      alt={concept.cover.alt}
+                      fill
+                      sizes="(min-width: 1100px) 45vw, (min-width: 640px) 50vw, 100vw"
+                      className={styles.conceptImage}
+                    />
+                    <span className={`tag tag-solid ${styles.conceptBadge}`}>
+                      Concept {concept.letter}
+                    </span>
+                  </div>
+                  <div className={styles.conceptBody}>
+                    <h3 className={styles.conceptTitle}>{concept.title}</h3>
+                    <p className={styles.conceptSummary}>{concept.summary}</p>
+                    <p className={styles.conceptSuitable}>
+                      <span className="eyebrow">Suitable for</span>
+                      <span>{concept.suitableFor}</span>
+                    </p>
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal>
+            <div className={styles.foot}>
+              <Link href={portfolioHref("/concepts")} className={styles.footLink}>
+                Explore all concepts <ArrowUpRight size={16} aria-hidden="true" />
+              </Link>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ——— Engagements ——— */}
+      <section className={`${styles.engagements} section`} aria-labelledby="engagements-heading">
+        <div className="shell">
+          <Reveal>
+            <SectionHeading
+              id="engagements-heading"
+              index="04"
+              title="Engagements"
+              annotation="Five ways to work together, from a focused corporate site to a full application. Scope and quotation are confirmed in writing before any work begins."
+            />
+          </Reveal>
+
+          <div className={styles.engagementGrid}>
+            {packagesByCategory.map((cat) => (
+              <Reveal key={cat.id} className={styles.engagementCell}>
+                <article className={styles.engagementCard}>
+                  <span className={styles.engagementIndex} aria-hidden="true">
+                    {cat.index}
+                  </span>
+                  <h3 className={styles.engagementTitle}>{cat.title}</h3>
+                  <p className={styles.engagementBlurb}>{cat.blurb}</p>
+                  <ul className={styles.engagementList}>
+                    {cat.items.map((pkg) => (
+                      <li key={pkg.id} className={styles.engagementItem}>
+                        <span className={styles.engagementName}>{pkg.name}</span>
+                        <span className={styles.engagementIdeal}>{pkg.ideal}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Link href={portfolioHref("/pricing")} className={styles.engagementLink}>
+                    View {cat.title.toLowerCase()} <ArrowUpRight size={15} aria-hidden="true" />
+                  </Link>
+                </article>
               </Reveal>
             ))}
           </div>
@@ -260,83 +287,98 @@ export default function HomePage() {
       </section>
 
       {/* ——— Process ——— */}
-      <section className={styles.section} aria-labelledby="process-heading">
-        <div className="container-portfolio">
-          <div className={styles.sectionHead}>
+      <section className="section" aria-labelledby="process-heading">
+        <div className="shell">
+          <Reveal>
             <SectionHeading
+              id="process-heading"
               index="05"
-              title="Development process"
-              annotation="Five stages, defined checkpoints, no black boxes."
+              title="Process"
+              annotation="Six stages, defined checkpoints, no black boxes. The exact steps adapt to the project — the discipline does not."
             />
-          </div>
+          </Reveal>
+
           <ol className={styles.processList}>
             {processSteps.map((step) => (
-              <li key={step.index} className={styles.processItem}>
-                <span className={styles.processIndex}>§{step.index}</span>
-                <h3 className={styles.processTitle}>{step.title}</h3>
-                <p className={styles.processText}>{step.description}</p>
-              </li>
+              <Reveal as="li" key={step.index} className={styles.processRow}>
+                <span className={styles.processNum} aria-hidden="true">
+                  {step.index}
+                </span>
+                <div className={styles.processBody}>
+                  <h3 className={styles.processTitle}>{step.title}</h3>
+                  <p className={styles.processDesc}>{step.description}</p>
+                </div>
+              </Reveal>
             ))}
           </ol>
         </div>
       </section>
 
-      {/* ——— Technology ——— */}
-      <section className={styles.section} aria-labelledby="tech-heading">
-        <div className="container-portfolio">
-          <div className={styles.sectionHead}>
+      {/* ——— Engineering ——— */}
+      <section className="section" aria-labelledby="tech-heading">
+        <div className="shell">
+          <Reveal>
             <SectionHeading
+              id="tech-heading"
               index="06"
-              title="Engineering capabilities"
+              title="Engineering"
               annotation="The right tool for each project — introduced only when the work requires it."
             />
+          </Reveal>
+
+          <div className={styles.techTable}>
+            <table>
+              <caption className="sr-only">Technology stack by layer</caption>
+              <tbody>
+                {specRows.map((row) => (
+                  <tr key={row.layer} className={styles.techRow}>
+                    <th scope="row">{row.layer}</th>
+                    <td>{row.stack}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-          <table className={styles.specTable}>
-            <caption className="sr-only">Technology stack by layer</caption>
-            <tbody>
-              {specRows.map((row) => (
-                <tr key={row.layer}>
-                  <th scope="row">{row.layer}</th>
-                  <td>{row.stack}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
         </div>
       </section>
 
       {/* ——— FAQ ——— */}
-      <section className={styles.section} aria-labelledby="faq-heading">
-        <div className="container-portfolio">
-          <div className={styles.sectionHead}>
+      <section className={`${styles.faq} section`} aria-labelledby="faq-heading">
+        <div className="shell">
+          <Reveal>
             <SectionHeading
+              id="faq-heading"
               index="07"
-              title="Frequently asked questions"
-              annotation="The questions that come up before nearly every project."
+              title="Questions"
+              annotation="Common questions answered directly."
             />
+          </Reveal>
+
+          <div className={styles.faqWrap}>
+            <Accordion items={faqItems} />
           </div>
-          <Accordion items={faqItems} />
         </div>
       </section>
 
       {/* ——— Final CTA ——— */}
-      <section className={styles.finalCta} aria-label="Start a project">
-        <div className="container-portfolio">
+      <section className={`${styles.finalCta} band-ink`} aria-label="Start a project">
+        <div className="shell">
           <Reveal>
-            <span className="mono-label">§08 — Start a project</span>
-            <h2 className={`font-display ${styles.finalTitle}`} style={{ marginTop: "1rem" }}>
-              Tell me what the business needs. I&apos;ll design around it.
+            <h2 className={styles.finalTitle}>
+              Tell me what the business needs. <span className="serif">I&rsquo;ll design around it.</span>
             </h2>
-            <p className={styles.finalText}>
-              Send a short brief — what you&apos;re building, who it&apos;s for, your approximate budget and
-              timeline. You&apos;ll get clarifying questions back, then a fixed-scope proposal. No pressure
-              tactics, no fake urgency.
-            </p>
-            <div className={styles.finalActions}>
-              <Cta href={portfolioHref("/contact")}>Start a project</Cta>
-              <Cta href={`mailto:${site.email}`} variant="outline">
-                Email directly
-              </Cta>
+            <div className={styles.finalBottom}>
+              <p className={styles.finalSub}>
+                Send a short brief — what you&rsquo;re building, who it&rsquo;s for, your
+                approximate scope and timeline. You&rsquo;ll get clarifying questions
+                back, then a proposal with a fixed scope. No pressure tactics, no fake urgency.
+              </p>
+              <div className={styles.finalActions}>
+                <Cta href={portfolioHref("/contact")}>Start a project</Cta>
+                <Cta href={`mailto:${site.email}`} variant="secondary">
+                  Email directly
+                </Cta>
+              </div>
             </div>
           </Reveal>
         </div>

@@ -1,94 +1,144 @@
 .footer {
-  margin-top: auto;
-  background: var(--paper);
+  padding-block: clamp(3.5rem, 7vw, 6rem) 2rem;
 }
 
-.emailBlock {
-  display: grid;
-  gap: 1rem;
-  padding: clamp(3rem, 7vw, 5.5rem) 0;
-  border-bottom: 1px solid var(--hairline);
+.head {
+  padding-bottom: clamp(2rem, 4vw, 3rem);
+  border-bottom: 1px solid var(--line);
 }
 
-.emailLink {
-  display: inline-flex;
+.kicker {
+  color: var(--fg-subtle);
+}
+
+.email {
+  display: flex;
   align-items: center;
   gap: 0.75rem;
-  flex-wrap: wrap;
-  color: var(--ink);
+  margin-top: 1.5rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.5rem, 0.9rem + 3.2vw, 3.25rem);
+  letter-spacing: -0.035em;
+  line-height: 1.05;
   text-decoration: none;
-  font-size: clamp(1.5rem, 4.5vw, 3.2rem);
+  color: var(--on-ink);
+  transition: color 0.25s ease;
   word-break: break-word;
-  transition: color 0.2s ease;
 }
 
-.emailLink svg {
-  width: clamp(1.25rem, 3vw, 2rem);
-  height: clamp(1.25rem, 3vw, 2rem);
-  flex-shrink: 0;
+.email:hover {
+  color: var(--accent);
 }
 
-.emailLink:hover {
-  color: var(--signal);
+.emailIcon {
+  flex: none;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.columns {
+.email:hover .emailIcon {
+  transform: translate(4px, -4px);
+}
+
+.body {
   display: grid;
-  gap: 3rem;
-  padding: clamp(2.5rem, 5vw, 4rem) 0;
+  grid-template-columns: 1.1fr 2fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  padding-block: clamp(2.25rem, 4vw, 3.25rem);
+  border-bottom: 1px solid var(--line);
 }
 
 .brandCol {
   display: grid;
-  gap: 0.5rem;
+  gap: 1.1rem;
   align-content: start;
 }
 
-.brandName {
+.mark {
+  color: var(--on-ink);
+}
+
+.meta {
   margin: 0;
-  font-weight: 600;
-  font-stretch: 108%;
-  letter-spacing: -0.02em;
-  font-size: 1.1rem;
+  max-width: 36ch;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--fg-muted);
 }
 
-.brandRole {
-  margin: 0;
-  font-size: 0.85rem;
-  color: var(--ink-soft);
+.social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  justify-self: start;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--fg-subtle);
+  transition: color 0.2s ease;
 }
 
-.brandMeta {
-  margin: 0.75rem 0 0;
+.social:hover {
+  color: var(--accent);
 }
 
-.linkGrid {
+.navGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 2rem;
 }
 
-.links {
-  list-style: none;
-  margin: 0.85rem 0 0;
-  padding: 0;
-  display: grid;
-  gap: 0.55rem;
-  font-size: 0.9rem;
+.navTitle {
+  color: var(--fg-subtle);
 }
 
-.bottomBar {
+.navLinks {
+  list-style: none;
+  margin: 1.1rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.navLinks a {
+  text-decoration: none;
+  font-size: 0.9375rem;
+  color: var(--fg-muted);
+  transition: color 0.2s ease;
+}
+
+.navLinks a:hover {
+  color: var(--accent);
+}
+
+.bottom {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 0.75rem;
-  padding: 1.4rem 0 1.6rem;
-  border-top: 1px solid var(--hairline);
+  gap: 0.75rem 2rem;
+  padding-top: 1.75rem;
 }
 
-@media (min-width: 880px) {
-  .columns {
-    grid-template-columns: 1.1fr 2fr;
-    gap: 4rem;
+.bottom p {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+
+@media (max-width: 860px) {
+  .body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .navGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.75rem;
   }
 }

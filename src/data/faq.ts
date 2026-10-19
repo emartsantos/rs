@@ -7,22 +7,22 @@ export const faqItems: Array<{ question: string; answer: string }> = [
   {
     question: "How do we start a project?",
     answer:
-      "Send a project inquiry describing what you need, your approximate budget, and your timeline. I'll reply with clarifying questions, then a fixed-scope proposal with deliverables, timeline, and price. Work begins with a deposit; the balance is due at handover.",
+      "Send a project inquiry describing what you need, your approximate scope, and your timeline. I'll reply with clarifying questions, then a proposal with a fixed scope, deliverables, timeline, and quotation. Work begins with a deposit; the balance is due at handover.",
   },
   {
-    question: "What's included in the listed starting prices?",
+    question: "What's included in each package?",
     answer:
-      "Each package page lists the exact deliverables. Starting prices cover the standard scope described — design, build, responsive layouts, agreed revisions, and deployment. Domain registration, hosting, third-party subscriptions, paid assets, and ongoing maintenance are excluded unless explicitly included in your quotation.",
+      "Each package page lists the exact deliverables. The standard scope covers design, build, responsive layouts, agreed revisions, and deployment. Domain registration, hosting, third party subscriptions, paid assets, and ongoing maintenance are excluded unless explicitly included in your quotation.",
   },
   {
     question: "How long does a typical project take?",
     answer:
-      "A landing page usually takes 1–2 weeks; a business website 2–4 weeks; corporate and e-commerce projects 4–10 weeks depending on scope and content readiness. Custom software is scheduled after discovery. Timelines are confirmed in the proposal before work starts.",
+      "A Corporate Website usually takes 2–4 weeks; a Premium Corporate Website 3–6 weeks; an Advanced E-commerce build 4–8 weeks; a Website + Admin Dashboard 6–10 weeks. Enterprise web applications are scheduled after discovery. Timelines are confirmed in writing before work starts and depend on how ready your content is.",
   },
   {
-    question: "Do you work with clients outside the Philippines?",
+    question: "Do you work with international clients?",
     answer:
-      "Yes — most projects can be run fully remotely with async updates. I regularly work with clients in Singapore, the United States, and other international markets, adjusting meeting times as needed.",
+      "Yes. My primary market is businesses based in Singapore, and I also work with clients in the United States, the Philippines, and other international markets. Most projects run fully remotely with async updates and meeting times adjusted to your time zone.",
   },
   {
     question: "Can you work with my existing brand and content?",
@@ -32,11 +32,16 @@ export const faqItems: Array<{ question: string; answer: string }> = [
   {
     question: "What happens after launch?",
     answer:
-      "Every project includes a handover session and documentation so your team can manage the basics. Ongoing maintenance, content updates, and further development are available as a separate monthly arrangement or per-request.",
+      "Every project includes a handover session and documentation so your team can manage the basics. Ongoing maintenance, content updates, and further development are available as a separate monthly arrangement or per request.",
   },
   {
-    question: "Are the sample websites on this site real client projects?",
+    question: "Are the projects on this site real?",
     answer:
-      "The five demo sites (Auren Studio, Fieldnote Coffee, Meridian Advisory, Oriel Objects, Northstar Operations) are clearly labeled concept projects for fictional businesses — they demonstrate design range and technical capability. Projects marked Independent Project are my own work, linked to their live deployments.",
+      "Yes. Every project shown is my own work on a real, deployed website or application, linked to its live deployment and source where available. The Website Concepts are the one exception: they are clearly labelled design directions for illustrative businesses, not delivered client work.",
+  },
+  {
+    question: "Which package is right for my project?",
+    answer:
+      "Start from what the site must do. If you mainly need credibility and information, a Corporate Website fits. If design quality is the differentiator, choose Premium Corporate. If you sell products, it's Advanced E-commerce. If you need internal tooling alongside the site, that's Website + Admin Dashboard. Larger systems with many features start with Enterprise. If you're unsure, describe your goals in an inquiry and I'll recommend the closest fit.",
   },
 ];

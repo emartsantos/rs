@@ -1,152 +1,204 @@
 .header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: var(--paper);
-  border-bottom: 1px solid var(--hairline);
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  border-bottom: 1px solid transparent;
+  transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease;
+}
+
+.solid {
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom-color: var(--border);
+}
+
+.over {
+  background: transparent;
+  color: var(--on-ink);
 }
 
 .bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 3.75rem;
-  gap: 1rem;
+  gap: 2rem;
+  height: clamp(64px, 8vh, 84px);
 }
 
 .brand {
   display: inline-flex;
-  align-items: baseline;
-  gap: 0.6rem;
+  align-items: center;
   text-decoration: none;
-  color: var(--ink);
-  min-width: 0;
-}
-
-.brandName {
-  font-weight: 600;
-  font-stretch: 108%;
-  letter-spacing: -0.02em;
-  font-size: 1.02rem;
-  white-space: nowrap;
-}
-
-.brandRole {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--graphite);
-  white-space: nowrap;
-  display: none;
+  color: inherit;
+  flex: none;
 }
 
 .nav {
-  display: none;
+  display: flex;
   align-items: center;
-  gap: 1.75rem;
+  gap: 0.15rem;
 }
 
 .navLink {
+  position: relative;
+  padding: 0.55rem 0.9rem;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--ink-soft);
+  color: var(--fg-muted);
   transition: color 0.2s ease;
 }
 
-.navLink:hover {
-  color: var(--signal);
+.navLink::after {
+  content: "";
+  position: absolute;
+  left: 0.9rem;
+  right: 0.9rem;
+  bottom: 0.3rem;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.navLink:hover,
 .navActive {
-  color: var(--ink);
-  text-decoration: underline;
-  text-decoration-color: var(--signal);
-  text-underline-offset: 6px;
-  text-decoration-thickness: 1.5px;
+  color: var(--fg);
+}
+
+.navLink:hover::after,
+.navActive::after {
+  transform: scaleX(1);
+}
+
+.navActive::after {
+  background: var(--accent);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: none;
 }
 
 .navCta {
-  padding: 0.55rem 0.95rem;
-  font-size: 0.7rem;
+  padding: 0.7rem 1.2rem;
 }
 
 .menuButton {
-  display: inline-flex;
+  display: none;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  margin-right: -0.5rem;
-  background: none;
-  border: none;
-  color: var(--ink);
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  color: inherit;
   cursor: pointer;
 }
 
-.mobilePanel {
-  display: none;
-  border-top: 1px solid var(--hairline);
-  background: var(--paper);
-  position: fixed;
-  inset: 3.75rem 0 0 0;
-  overflow-y: auto;
-  z-index: 49;
+/* Over-hero theme */
+.over .navLink {
+  color: color-mix(in srgb, var(--on-ink) 68%, transparent);
 }
 
-.mobileOpen {
-  display: block;
+.over .navLink:hover,
+.over .navActive {
+  color: var(--on-ink);
+}
+
+.over .menuButton {
+  border-color: color-mix(in srgb, var(--on-ink) 34%, transparent);
+}
+
+.over .navCta {
+  background: var(--on-ink);
+  color: var(--ink);
+  border-color: var(--on-ink);
+}
+
+.over .navCta:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* Mobile panel */
+.panel {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  display: flex;
+  align-items: center;
+  padding: clamp(6rem, 16vh, 9rem) clamp(1.5rem, 6vw, 3.5rem) 3rem;
+  background: var(--ink);
+  color: var(--on-ink);
+  transform: translateY(-100%);
+  visibility: hidden;
+  opacity: 0;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, visibility 0.55s;
+}
+
+.menuOpen .panel {
+  transform: translateY(0);
+  visibility: visible;
+  opacity: 1;
 }
 
 .mobileNav {
   display: flex;
   flex-direction: column;
-  padding: 2rem clamp(1.25rem, 4vw, 3.5rem) 3rem;
+  width: 100%;
 }
 
 .mobileLink {
   display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  padding: 1.3rem 0;
-  border-bottom: 1px solid var(--hairline);
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 9vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--on-ink);
   text-decoration: none;
-  color: var(--ink);
+  border-bottom: 1px solid color-mix(in srgb, var(--on-ink) 14%, transparent);
+  transition: color 0.2s ease, padding-left 0.3s ease;
 }
 
-.mobileLinkSignal {
-  margin-top: 2rem;
-  display: inline-flex;
+.mobileLink:hover {
+  color: var(--accent);
+  padding-left: 0.75rem;
+}
+
+.mobileCta {
+  margin-top: 2.25rem;
   align-self: flex-start;
-  padding: 0.85rem 1.4rem;
-  background: var(--signal);
-  color: var(--paper);
-  text-decoration: none;
-  font-size: 0.8rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
 }
 
-@media (min-width: 880px) {
+@media (max-width: 960px) {
   .nav {
-    display: flex;
-  }
-
-  .brandRole {
-    display: inline;
-  }
-
-  .menuButton {
     display: none;
   }
 
-  .mobilePanel {
-    display: none !important;
+  .menuButton {
+    display: inline-flex;
+  }
+
+  .navCta {
+    display: none;
+  }
+}
+
+@media (min-width: 961px) {
+  .panel {
+    display: none;
   }
 }

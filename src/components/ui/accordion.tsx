@@ -9,12 +9,20 @@ type AccordionItem = {
   answer: string;
 };
 
-export function Accordion({ items }: { items: AccordionItem[] }) {
+export function Accordion({
+  items,
+  style,
+  className = "",
+}: {
+  items: AccordionItem[];
+  style?: React.CSSProperties;
+  className?: string;
+}) {
   const [open, setOpen] = useState<number | null>(0);
   const baseId = useId();
 
   return (
-    <div className={styles.list}>
+    <div className={`${styles.list} ${className}`} style={style}>
       {items.map((item, i) => {
         const isOpen = open === i;
         return (

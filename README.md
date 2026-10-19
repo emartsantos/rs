@@ -1,36 +1,122 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Raymart Santos — Portfolio
 
-## Getting Started
+Next.js 16 static-export portfolio with a distinctive editorial design system. Deployed to Vercel.
 
-First, run the development server:
+## Stack
+
+- **Framework**: Next.js 16 (App Router, React 19, TypeScript)
+- **Styling**: Tailwind CSS v4 + CSS Modules, CSS custom properties
+- **Fonts**: Archivo (variable) + IBM Plex Mono (self-hosted via `next/font`)
+- **Icons**: Lucide React
+- **Forms**: Formspree-compatible endpoint (optional)
+- **Deploy**: Vercel (static export to `./out`)
+
+## Routes
+
+| Route | Description |
+|-------|-------------|
+| `/` | Home — hero, selected work, services, pricing, why, process, tech, FAQ, CTA |
+| `/work` | Project browser with category filters |
+| `/work/[slug]` | Case study pages (10 projects) |
+| `/services` | 10 services with deliverables |
+| `/pricing` | 8 packages in 3 categories + comparison table |
+| `/about` | Bio, interests, engineering capabilities |
+| `/contact` | Validated inquiry form (Formspree or mailto fallback) |
+
+## Local Development
 
 ```bash
+# Install dependencies
+npm install
+
+# Development server (with Turbopack)
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Production build (static export to ./out)
+npm run build
+
+# Preview static build locally
+npx serve out
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `NEXT_PUBLIC_FORMSPREE_ENDPOINT` | No | Formspree (or compatible) form endpoint for contact submissions. If unset, form falls back to `mailto:` with pre-filled data. |
 
-## Learn More
+Create `.env.local` for local development:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/your-form-id
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Vercel Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Import the repository at [vercel.com/new](https://vercel.com/new), or run `vercel` from the CLI.
+2. Vercel builds with `npm run build` and serves the static export from `./out`.
+3. Pushing to `main` triggers a production deployment via Vercel's Git integration.
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+src/
+├── app/
+│   ├── (portfolio)/          # Portfolio route group
+│   │   ├── page.tsx          # Home
+│   │   ├── layout.tsx        # Header + Footer shell
+│   │   ├── services/         # Services page
+│   │   ├── pricing/          # Pricing page
+│   │   ├── about/            # About page
+│   │   ├── contact/          # Contact form
+│   │   └── work/
+│   │       ├── page.tsx      # Work browser
+│   │       └── [slug]/       # Case study pages
+│   ├── globals.css           # Design tokens, base styles, utilities
+│   └── layout.tsx            # Root layout, fonts, metadata
+├── components/
+│   ├── portfolio/            # Header, Footer, WorkBrowser, FeaturedProjectRow
+│   └── ui/                   # CTA, SectionHeading, Accordion, Reveal
+├── data/
+│   ├── projects.ts           # 5 concept + 5 independent projects
+│   ├── services.ts           # 10 services
+│   ├── packages.ts           # 8 pricing packages + comparison data
+│   ├── process.ts            # 5 process steps
+│   └── faq.ts                # 8 FAQs
+└── lib/
+    └── site.ts               # Site config, portfolioHref helper
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Design System
+
+**Colors** (CSS custom properties in `globals.css`):
+- `--paper` / `--paper-raised` — backgrounds
+- `--ink` / `--ink-soft` / `--graphite` — text hierarchy
+- `--hairline` / `--hairline-strong` — borders, dividers
+- `--signal` / `--signal-deep` — accent (CTAs, links, focus)
+
+**Typography**:
+- Display: Archivo variable (wdth axis), tightened tracking
+- UI/Mono: IBM Plex Mono, uppercase, letter-spaced labels
+- Utilities: `.font-display`, `.font-display-md`, `.mono-label`, `.annotation`
+
+**Utilities**:
+- `.container-portfolio` — max-width 1400px, responsive padding
+- `.hairline-t` / `.hairline-b` — top/bottom rules
+- `.link-ink` — accessible underlined links
+- `.reveal` / `.reveal.is-visible` — scroll-reveal (respects `prefers-reduced-motion`)
+
+## Scripts
+
+```bash
+npm run dev       # Turbopack dev server
+npm run build     # Static export (output: "export")
+npm run lint      # ESLint (Next.js core-web-vitals + TS config)
+npm run typecheck # tsc --noEmit
+```
+
+## License
+
+MIT — feel free to reference the architecture and patterns for your own portfolio.

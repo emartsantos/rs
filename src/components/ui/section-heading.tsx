@@ -5,16 +5,27 @@ type SectionHeadingProps = {
   title: string;
   annotation?: string;
   className?: string;
+  tag?: "h2" | "h3";
+  id?: string;
 };
 
-export function SectionHeading({ index, title, annotation, className = "" }: SectionHeadingProps) {
+export function SectionHeading({
+  index,
+  title,
+  annotation,
+  className = "",
+  tag: Tag = "h2",
+  id,
+}: SectionHeadingProps) {
   return (
-    <div className={`${styles.heading} ${className}`}>
-      <span className="mono-label" aria-hidden="true">
-        §{index}
+    <header className={`${styles.head} ${className}`}>
+      <span className={`${styles.index} eyebrow`} aria-hidden="true">
+        {index}
       </span>
-      <h2 className={`font-display-md text-[clamp(1.6rem,3.2vw,2.4rem)] ${styles.title}`}>{title}</h2>
-      {annotation ? <p className={`annotation ${styles.annotation}`}>{annotation}</p> : null}
-    </div>
+      <div className={styles.body}>
+        <Tag id={id} className={styles.title}>{title}</Tag>
+        {annotation && <p className={styles.note}>{annotation}</p>}
+      </div>
+    </header>
   );
 }

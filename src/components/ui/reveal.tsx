@@ -7,19 +7,21 @@ type RevealProps = {
   className?: string;
   as?: ElementType;
   delay?: number;
+  style?: React.CSSProperties;
 };
 
-export function Reveal({ children, className = "", as: Tag = "div", delay = 0 }: RevealProps) {
+function prefersReducedMotion(): boolean {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+export function Reveal({ children, className = "", as: Tag = "div", delay = 0, style }: RevealProps) {
   const ref = useRef<HTMLElement | null>(null);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(prefersReducedMotion);
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setVisible(true);
-      return;
-    }
+    if (!el || visible) return;
     const io = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -33,13 +35,13 @@ export function Reveal({ children, className = "", as: Tag = "div", delay = 0 }:
     );
     io.observe(el);
     return () => io.disconnect();
-  }, []);
+  }, [visible]);
 
   return (
     <Tag
       ref={ref}
       className={`reveal ${visible ? "is-visible" : ""} ${className}`}
-      style={delay > 0 ? { transitionDelay: `${delay}ms` } : undefined}
+      style={{ ...style, ...(delay > 0 ? { transitionDelay: `${delay}ms` } : {}) }}
     >
       {children}
     </Tag>
