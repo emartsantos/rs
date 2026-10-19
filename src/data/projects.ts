@@ -390,25 +390,26 @@ export const independentProjects: Project[] = [
     industry: "Corporate — Technology",
     category: "Corporate Websites",
     type: "Independent Project",
-    tagline: "A corporate website build in development, source available.",
+    tagline: "A live corporate technology site with a typed front end and a Prisma data layer.",
     description:
-      "A corporate website for Apex Horizon Technologies built with Next.js, TypeScript, and Tailwind CSS, with a Prisma data layer in the repository. The source is public on GitHub; a public deployment has not been verified, so no live site is presented.",
+      "A corporate website for Apex Horizon Technologies built with Next.js, TypeScript, and Tailwind CSS, with a Prisma data layer in the repository. It is deployed live on Vercel, and the source is public on GitHub.",
     suggestedPackage: "Comparable to Corporate Website",
     designDirection:
       "Corporate and structured — a restrained, typographic layout with a data layer in place for dynamic content.",
     keyFeatures: [
-      "Corporate site structure in development",
+      "Corporate site structure and navigation",
       "Prisma schema included in the repository",
       "Environment configuration example provided",
       "Vercel deployment configuration",
     ],
     techStack: ["Next.js 16", "TypeScript", "Tailwind CSS v4", "Prisma"],
     cover: { photoId: "photo-1506905925346-21bda4d32df4", alt: "Mountain range reflected in an alpine lake" },
+    externalUrl: "https://apex-horizon-technologies.vercel.app/",
     sourceUrl: "https://github.com/emartsantos/apex-horizon",
-    // No externalUrl: no live deployment has been verified.
+    liveVerified: true,
     caseStudy: {
       overview:
-        "Apex Horizon is a corporate website in development for a fictional technology company, Apex Horizon Technologies. At the time of writing it is a working code project rather than a finished, deployed site, and it is presented here as such.",
+        "Apex Horizon is a corporate website for a fictional technology company, Apex Horizon Technologies. It is a working, deployed build that pairs a corporate front end with a Prisma data layer prepared for managed content.",
       businessScenario:
         "The project explores a corporate website that also carries a database — a common requirement when a company's site needs dynamic, managed content rather than fixed pages.",
       audience:
@@ -431,9 +432,9 @@ export const independentProjects: Project[] = [
             "Because the site is intended to become data driven, the layout and content model are kept separate from the start.",
         },
         {
-          decision: "No live site presented until verified",
+          decision: "Corporate hierarchy kept shallow",
           rationale:
-            "A deployment has not been confirmed, so the project is linked as source only rather than implying a working public site.",
+            "Primary sections are kept to a shallow hierarchy so company and product content stays a click or two from the home page.",
         },
       ],
       features: [
